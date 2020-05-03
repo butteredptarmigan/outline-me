@@ -1,0 +1,29 @@
+// All static styles required to make it work
+#animatable() {
+    //background: none;
+    border: 0;
+    box-sizing: border-box;
+
+    // Required, since we're setting absolute on pseudo-elements
+    position: relative;
+    vertical-align: middle;
+
+    &::before,
+    &::after {
+        box-sizing: inherit;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// Extracted initial border styles
+// You can force transparent borders to be included by using equivalent rgba/hex value
+#initial-border(@resting-color, @border-thickness) {
+    // Using inset box-shadow instead of border for sizing simplicity
+    & when not (@resting-color = transparent) {
+        box-shadow: inset 0 0 0 @border-thickness @resting-color;
+        color: @resting-color;
+    }
+}
